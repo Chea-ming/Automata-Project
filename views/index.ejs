@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finite Automaton Simulator</title>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" />
+    <link rel="stylesheet" href="/css/fas.css" />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <style>
+        .links line {
+            stroke: #999;
+            stroke-opacity: 0.6;
+        }
+    
+        .nodes circle {
+            stroke: #fff;
+            stroke-width: 1.5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <h1>FA simulator</h1>
+            <p>
+                Design, Test, Construct, and Minimize FAs
+            </p>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="container controls">
+            <div class="row-fluid">
+                <div class="span6 column">
+                    <h3> &#x2460; Create Automaton </h3>
+                    
+                    <ul class="nav nav-tabs">
+                        <li id="fsminput" class="active"><a href="#tab2" data-toggle="tab">Input automaton</a></li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tab2">
+                            <div class="instructions">
+                                <p>
+                                    Enter a FSM into the input field below or click <strong>Generate random
+                                        DFA/NFA</strong> to have the app generate a simple FSM randomly for you.
+                                    Next, click <strong>Create automaton</strong> to display the FSM's transition graph.
+                                </p>
+                                <p>
+                                    A valid FSM definition contains a list of states, symbols and transitions, the
+                                    initial state and the accepting states. States and symbols are alphanumeric
+                                    character strings and can not overlap. Transitions have the format:
+                                    <code>stateA:symbol>stateB,stateC</code>. The <code>$</code> character is used to
+                                    represent the empty string symbol (epsilon) but should not be listed in the
+                                    alphabet. Generate a FSM to see a valid example.
+                                </p>
+                            </div>
+
+                            <p>
+                                <button onclick="generateRandomDFA()" id="generateDFA" class="btn">Generate random DFA</button>
+                                <button onclick="generateRandomNFA()" id="generateNFA" class="btn">Generate random NFA</button>
+                            </p>
+                            <p>
+                                <textarea id="fas" class="input-block-level" type="text" placeholder="or write your own"
+                                    spellcheck="false" name="userInput"></textarea>
+                                <p>
+                                    <button id="createButton" type="submit" onclick="createAutomaton()" class="btn">Create automaton</button>
+                                </p>
+                            </p>
+
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="span6 column">
+                    <h3> &#x2461; Determine Automaton Type </h3>
+                    <div class="instructions" id="type">
+                        <p>
+                            To determine the type of a finite automaton, we need to check two key characteristics:
+                        </p>
+                        <p>
+                            <strong>1.Determinism of State Transitions:</strong>
+                            In a DFA, each state and input symbol must have exactly one unique next state.
+                            In an NFA, a state and input symbol can have zero, one, or multiple possible next states.
+                        </p>
+                        <p>
+                            <strong>2.Presence of Epsilon (Empty) Transitions:</strong>
+                            In a DFA, the state transitions must always consume an input symbol from the alphabet.
+                            In an NFA, there can be state transitions that do not consume any input symbol, also known as epsilon or empty
+                            transitions.
+                        </p>
+                    </div>
+                </div>
+                <div class="span6 column" id="process">
+                    <h3> &#x2463; Simulate Automaton </h3>
+                
+                    <div class="instructions">
+                        <p>
+                            Enter a sequence of input symbols into the input field below or click <strong>Random
+                                string</strong>, <strong>Acceptable string</strong> and <strong>Unacceptable
+                                string</strong> to have the app generate random acceptable and unacceptable sequences
+                            for you.
+                        </p>
+                        
+                    </div>
+                
+                    <p>
+                        <button id="generateRandomString" onclick="generateRandomString()" class="btn"> Random string </button>
+                        <button id="generateRandomAcceptableString" class="btn"> Acceptable string </button>
+                        <button id="generateRandomUnacceptableString" class="btn"> Unacceptable string
+                        </button>
+                    </p>
+                    <p>
+                        <input id="str" class="input-block-level" type="text" placeholder="or write your own" spellcheck="false">
+                    </p>
+                    <p>
+                        <button id="submitString" onclick="processString()" class="btn"> Submit </button>
+                    </p>
+                    
+                    
+                </div>
+            </div>
+            <hr />
+        </div>
+        <div class="container graph">
+            <h3> &#x2462; Transition graph </h3>
+        
+            <p>
+                The FSM being simulated is displayed in the form of a transition graph.
+            </p>
+            <p id="image-container">
+                
+            </p>
+        </div>
+    </div>
+    <script src="/js/fas.js"></script>
+</body>
+</html>
