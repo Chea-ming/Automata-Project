@@ -1,4 +1,4 @@
-1. Install Node.js via terminal the browser.
+1. Install Node.js via terminal or browser.
 2. Install Graphviz via terminal or browser.
 3. In the terminal, run the following command to install the dependencies: npm i node express graphviz body-parser ejs
 4. Go to extension on vs code, Install Graphviz(dot) language supported.
